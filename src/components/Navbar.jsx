@@ -40,7 +40,7 @@ const Navbar = () => {
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
             <span className="text-[#915EFF]">Nirvan</span>&nbsp;
             <span className="sm:block hidden text-secondary">
-              | JavaScript Mastery
+              | Work Portfolio
             </span>
           </p>
         </Link>
