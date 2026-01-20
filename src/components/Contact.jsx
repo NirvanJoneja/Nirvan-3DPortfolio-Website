@@ -37,9 +37,9 @@ const Contact = () => {
         "template_v3dx4vn",     // <--- PASTE TEMPLATE ID HERE
         {
           from_name: form.name,
-          to_name: "Nirvan",               // I updated this to your name
+          to_name: "Nirvan",               
           from_email: form.email,
-          to_email: "joneja.nirvan@gmail.com", // I updated this to your email
+          to_email: "joneja.nirvan@gmail.com", 
           message: form.message,
         },
         "nImJ36_QNjp21GrNj"       // <--- PASTE PUBLIC KEY HERE
