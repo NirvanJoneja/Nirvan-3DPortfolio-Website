@@ -7,7 +7,6 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
-
 import CanvasLoader from "../Loader";
 
 const Ball = (props) => {
@@ -42,8 +41,14 @@ const BallCanvas = ({ icon }) => {
     <div style={{ width: "100%", height: "100%", background: "#050816" }}>
       <Canvas
         frameloop="always"
-        dpr={[1, 1]}
-        gl={{ preserveDrawingBuffer: true, antialias: false, alpha: false }}
+        dpr={1}
+        gl={{
+          preserveDrawingBuffer: true,
+          antialias: false,
+          alpha: false,
+          powerPreference: "low-power",
+          failIfMajorPerformanceCaveat: false,
+        }}
         onCreated={({ gl }) => gl.setClearColor("#050816", 1)}
       >
         <color attach="background" args={["#050816"]} />
