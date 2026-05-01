@@ -38,27 +38,17 @@ const Ball = (props) => {
 
 const BallCanvas = ({ icon }) => {
   return (
-    <div style={{ width: "100%", height: "100%", background: "#050816" }}>
-      <Canvas
-        frameloop="always"
-        dpr={1}
-        gl={{
-          preserveDrawingBuffer: true,
-          antialias: false,
-          alpha: false,
-          powerPreference: "low-power",
-          failIfMajorPerformanceCaveat: false,
-        }}
-        onCreated={({ gl }) => gl.setClearColor("#050816", 1)}
-      >
-        <color attach="background" args={["#050816"]} />
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls enableZoom={false} />
-          <Ball imgUrl={icon} />
-        </Suspense>
-        <Preload all />
-      </Canvas>
-    </div>
+    <Canvas
+      frameloop='demand'
+      dpr={[1, 2]}
+      gl={{ preserveDrawingBuffer: true }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls enableZoom={false} />
+        <Ball imgUrl={icon} />
+      </Suspense>
+      <Preload all />
+    </Canvas>
   );
 };
 
