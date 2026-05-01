@@ -4,11 +4,11 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("/desktop_pc/scene.gltf");
   return (
     <mesh>
       <hemisphereLight intensity={0.15} groundColor="black" />
-      <spotLight position={[-20, 50, 10]} angle={0.12} penumbra={1} intensity={1} castShadow shadow-mapSize={1024} />
+      <spotLight position={[-20, 50, 10]} angle={0.12} penumbra={1} intensity={1} />
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
@@ -22,13 +22,9 @@ const Computers = ({ isMobile }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isAndroid, setIsAndroid] = useState(false);
   const [webGLSupported, setWebGLSupported] = useState(true);
 
   useEffect(() => {
-    const android = /android/i.test(navigator.userAgent);
-    setIsAndroid(android);
-
     try {
       const canvas = document.createElement("canvas");
       const supported = !!(
@@ -47,8 +43,7 @@ const ComputersCanvas = () => {
     return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
   }, []);
 
-  // Android gets a clean dark fallback — no WebGL
-  if (isAndroid || !webGLSupported) {
+  if (!webGLSupported) {
     return <div style={{ width: "100%", height: "100%", background: "#050816" }} />;
   }
 
@@ -56,10 +51,16 @@ const ComputersCanvas = () => {
     <div style={{ width: "100%", height: "100%", background: "#050816" }}>
       <Canvas
         frameloop="always"
-        shadows
-        dpr={[1, 1]}
+        shadows={false}
+        dpr={1}
         camera={{ position: [20, 3, 5], fov: 25 }}
-        gl={{ preserveDrawingBuffer: true, antialias: false, alpha: false }}
+        gl={{
+          preserveDrawingBuffer: true,
+          antialias: false,
+          alpha: false,
+          powerPreference: "low-power",
+          failIfMajorPerformanceCaveat: false,
+        }}
         onCreated={({ gl }) => gl.setClearColor("#050816", 1)}
       >
         <color attach="background" args={["#050816"]} />
@@ -72,5 +73,7 @@ const ComputersCanvas = () => {
     </div>
   );
 };
+
+useGLTF.preload("/desktop_pc/scene.gltf");
 
 export default ComputersCanvas;
