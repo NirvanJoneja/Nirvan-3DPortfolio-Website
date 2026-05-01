@@ -22,9 +22,13 @@ const Computers = ({ isMobile }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
   const [webGLSupported, setWebGLSupported] = useState(true);
 
   useEffect(() => {
+    const android = /android/i.test(navigator.userAgent);
+    setIsAndroid(android);
+
     try {
       const canvas = document.createElement("canvas");
       const supported = !!(
@@ -43,7 +47,10 @@ const ComputersCanvas = () => {
     return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
   }, []);
 
-  if (!webGLSupported) return null;
+  // Android gets a clean dark fallback — no WebGL
+  if (isAndroid || !webGLSupported) {
+    return <div style={{ width: "100%", height: "100%", background: "#050816" }} />;
+  }
 
   return (
     <div style={{ width: "100%", height: "100%", background: "#050816" }}>
