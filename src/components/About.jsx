@@ -51,7 +51,7 @@ const About = () => {
         engineering fundamentals. My work spans TypeScript and JavaScript for
         front-end systems, Go and Python for backend services, and applied AI
         where it meaningfully improves efficiency or decision-making. I focus
-        on building clear, reliable systems that scale in complexity and usage —
+        on building clear, reliable systems that scale in complexity and usage
         software designed to survive real-world constraints, not just ship
         features quickly.
       </motion.p>
